@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ProjectLoveMyPlanet</string>
+    <string name="ACCEDER">ACCEDER</string>
+    <string name="txtTituloCrearCuenta">Crear Cuenta</string>
+    <string name="Voluntario">Voluntario</string>
+    <string name="Auspiciador">Auspiciador</string>
+    <string name="OlvidasteContraseña">¿Olvidaste tu contraseña?</string>
+</resources>
