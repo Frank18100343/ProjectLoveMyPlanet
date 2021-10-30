@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloCrearCuenta"
-        app:layout_constraintVertical_bias="0.418" />
+        app:layout_constraintVertical_bias="0.396" />
 
     <TextView
         android:id="@+id/btnCrearCuentaVoluntario"
