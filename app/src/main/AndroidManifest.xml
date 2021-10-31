@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLoveMyPlanet">
         <activity
+            android:name=".RegAuspiciadorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegVoluntarioActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

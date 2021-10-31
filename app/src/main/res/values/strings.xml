@@ -5,4 +5,6 @@
     <string name="Voluntario">Voluntario</string>
     <string name="Auspiciador">Auspiciador</string>
     <string name="OlvidasteContraseña">¿Olvidaste tu contraseña?</string>
+    <string name="politica_privacidad">Al crear una cuenta accedes a nuestros Términos y Pólitica  de Privacidad</string>
+    <string name="button_reg_vol">CREAR CUENTA</string>
 </resources>
