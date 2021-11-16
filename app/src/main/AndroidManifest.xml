@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLoveMyPlanet">
         <activity
+            android:name=".VoluntarioActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AuspiciadorActivity"
+            android:exported="true" />
+        <activity
             android:name=".RegistrarVoluntarioActivity"
             android:exported="true" />
         <activity
@@ -17,7 +23,7 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
