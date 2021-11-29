@@ -101,8 +101,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     //Redireccionar a su layaout Voluntario
-                    startActivity(new Intent(LoginActivity.this, VoluntarioActivity.class));
-
+                    startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                    //falta ocultar opciones segun perfil
                 }
             }
 
@@ -117,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot2) {
                 if (snapshot2.exists()) {
                     //Redireccionar a su layaout Auspiciador
-                    startActivity(new Intent(LoginActivity.this, AuspiciadorActivity.class));
+                    startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                    //falta ocultar opciones segun perfil
                 }
             }
 
