@@ -93,6 +93,7 @@ public class RegistrarAuspiciadorActivity extends AppCompatActivity {
                     map.put("ruc",ruc);
                     map.put("telefono",telefono);
                     map.put("email",email);
+                    map.put("saldoPuntos",0);
                     //map.put("password",System.text.Encoding.UTF8.GetBytes(password));
 
                     db.child("auspiciadores").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {

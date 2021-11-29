@@ -95,6 +95,7 @@ public class RegistrarVoluntarioActivity extends AppCompatActivity {
                     map.put("apellidos",apellidos);
                     map.put("telefono",telefono);
                     map.put("email",email);
+                    map.put("saldoPuntos",0);
                     //map.put("password",System.text.Encoding.UTF8.GetBytes(password));
 
                     db.child("voluntarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
