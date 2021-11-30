@@ -31,14 +31,27 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference db;
 
+
+
     private String email = "";
     private String password = "";
+
+
+    public String nombres;
+    public String ruc;
+    public String razonSocial;
+    public String apellidos;
+    public String correo;
+    public String telefono;
+    public String saldoPuntos;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance().getReference();
@@ -55,6 +68,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = mEditTextEmail.getText().toString();
                 password = mEditTextPassword.getText().toString();
+
+
 
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -100,8 +115,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+
+                    GlobalClass globalClass = (GlobalClass) getApplicationContext();
+
+                    nombres  = snapshot.child("nombres").getValue().toString();
+                    apellidos  = snapshot.child("apellidos").getValue().toString();
+                    correo  = snapshot.child("email").getValue().toString();
+                    telefono  = snapshot.child("telefono").getValue().toString();
+                    saldoPuntos  = snapshot.child("saldoPuntos").getValue().toString();
+
+                    globalClass.setNombres(nombres);
+                    globalClass.setApellidos(apellidos);
+                    globalClass.setEmail(correo);
+                    globalClass.setTelefono(telefono);
+                    globalClass.setSaldoPuntos(saldoPuntos);
+
                     //Redireccionar a su layaout Voluntario
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                    //startActivity(new Intent(LoginActivity.this, VoluntarioActivity.class));
                     //falta ocultar opciones segun perfil
                 }
             }

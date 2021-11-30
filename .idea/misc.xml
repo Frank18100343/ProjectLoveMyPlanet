@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/NuevoProyecto/app/src/main/res/layout/activity_principal.xml" value="0.3578125" />
+        <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/NuevoProyecto/app/src/main/res/layout/activity_voluntario.xml" value="0.5" />
+        <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/NuevoProyecto/app/src/main/res/layout/app_bar_principal.xml" value="0.3578125" />
+        <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/NuevoProyecto/app/src/main/res/layout/content_principal.xml" value="0.3578125" />
+        <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/NuevoProyecto/app/src/main/res/layout/fragment_canjear.xml" value="0.27943840579710144" />
         <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/ProjectLoveMyPlanet/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/ProjectLoveMyPlanet2/app/src/main/res/layout/activity_auspiciador.xml" value="0.21105072463768115" />
         <entry key="..\:/02 ESAN/2021/2 CICLO/DESARROLLO DE SOLUCIONES MOVILES/ProjectLoveMyPlanet2/app/src/main/res/layout/activity_login.xml" value="0.33" />
