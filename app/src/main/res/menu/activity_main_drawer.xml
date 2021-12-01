@@ -9,6 +9,14 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_main" />
         <item
+            android:id="@+id/nav_registrar_actividades"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "@string/menu_registrar_actividad"/>
+        <item
+            android:id="@+id/nav_listar_actividades"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_listar_actividad" />
+        <item
             android:id="@+id/nav_suscribir_actividad"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_suscribir_actividad" />
@@ -16,5 +24,6 @@
             android:id="@+id/nav_canjear"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_canjear" />
+
     </group>
 </menu>

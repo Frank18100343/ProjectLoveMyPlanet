@@ -19,6 +19,9 @@ import kotlinx.android.synthetic.main.nav_header_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
 
+
+
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPrincipalBinding
 
@@ -26,12 +29,11 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+//este es el proyecto?
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarPrincipal.toolbar)
-
         binding.appBarPrincipal.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -45,7 +47,10 @@ class PrincipalActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_canjear, R.id.nav_suscribir_actividad, R.id.nav_main
+                R.id.nav_registrar_actividades,
+
+                R.id.nav_listar_actividades, R.id.nav_canjear,
+                R.id.nav_suscribir_actividad, R.id.nav_main
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -63,4 +68,6 @@ class PrincipalActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 
     }
+
+
 }

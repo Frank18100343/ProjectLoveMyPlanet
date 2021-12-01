@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dev.frankperez.projectlovemyplanet.ui.fragments.Actividad;
+
 public class LoginActivity extends AppCompatActivity {
+
+    TextView mTextViewData;
+    Spinner mSpinnerActividades;
+
 
     private TextView mButtonVoluntario;
     private TextView mButtonAuspiciador;
@@ -142,22 +153,46 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-        db.child("auspiciadores").child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                if (snapshot2.exists()) {
-                    //Redireccionar a su layaout Auspiciador
-                    startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-                    //falta ocultar opciones segun perfil
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
     }
-}
+/*
+        public void cargarActividades() {
+            final List<Actividad> actividades = new ArrayList<>();
+            db.child("actividades").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            String id = ds.getKey();
+                            String nombre = ds.child("nombre").getValue().toString();
+                            actividades.add(new Actividad(id, nombre));
+                        }
+                        ArrayAdapter<Actividad> arrayAdapter = new ArrayAdapter<>(LoginActivity.this, android.R.layout.simple_dropdown_item_1line, actividades);
+                        mSpinnerActividades.setAdapter(arrayAdapter);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            db.child("auspiciadores").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                    if (snapshot2.exists()) {
+                        //Redireccionar a su layaout Auspiciador
+                        startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                        //falta ocultar opciones segun perfil
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }*/
+    }
+
