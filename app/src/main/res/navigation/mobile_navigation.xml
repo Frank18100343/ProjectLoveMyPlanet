@@ -22,11 +22,11 @@
     <fragment
         android:id="@+id/nav_listar_actividades"
         android:name="dev.frankperez.projectlovemyplanet.ui.fragments.ListadoActividadesFragment"
-        android:label="fragment_listado_actividades"
+        android:label="@string/menu_listar_actividad"
         tools:layout="@layout/fragment_listado_actividades" />
     <fragment
         android:id="@+id/nav_registrar_actividades"
         android:name="dev.frankperez.projectlovemyplanet.ui.fragments.RegistroActividadesFragment"
-        android:label="fragment_registro_actividad"
+        android:label="@string/menu_registrar_actividad"
         tools:layout="@layout/fragment_registro_actividades" />
 </navigation>

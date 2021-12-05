@@ -83,12 +83,12 @@
         android:id="@+id/mButtonAuspiciador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="goToRegisterAuspiciador"
         android:text="@string/Auspiciador"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="goToRegisterAuspiciador"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloCrearCuenta"
         app:layout_constraintVertical_bias="0.112"
         tools:ignore="OnClick" />
@@ -96,17 +96,18 @@
     <RadioGroup
         android:layout_width="244dp"
         android:layout_height="71dp"
+        android:layout_marginStart="100dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/mEditTextEmail"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="100dp">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
         <RadioButton
             android:id="@+id/rbAuspiciador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Auspiciador"
             android:checked="true"
+            android:text="Auspiciador"
             tools:layout_editor_absoluteX="75dp"
             tools:layout_editor_absoluteY="131dp" />
 
