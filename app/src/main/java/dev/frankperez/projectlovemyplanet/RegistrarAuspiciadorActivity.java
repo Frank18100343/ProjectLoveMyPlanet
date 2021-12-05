@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class RegistrarAuspiciadorActivity extends AppCompatActivity {
     private EditText mEditTextEmail_A;
     private EditText mEditTextPassword_A;
     private Button mButtonRegAus;
-
+private CheckBox checkAceptar;
     //Variables de entrada
     private String razonsocial = "";
     private String ruc = "";
@@ -54,16 +55,28 @@ public class RegistrarAuspiciadorActivity extends AppCompatActivity {
         mEditTextEmail_A = findViewById(R.id.mEditTextEmail_A);
         mEditTextPassword_A = findViewById(R.id.mEditTextPassword_A);
         mButtonRegAus = findViewById(R.id.mButtonRegAus);
+        checkAceptar = findViewById(R.id.checkAceptar);
 
+        checkAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mButtonRegAus.setEnabled(checkAceptar.isChecked());
+            }
+        });
+
+        mButtonRegAus.setEnabled(false);
         mButtonRegAus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkAceptar.isChecked()){
+                    Toast.makeText(RegistrarAuspiciadorActivity.this, "Debe aceptar los terminos y condiciones", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 razonsocial = mEditTextRazonSocial_A.getText().toString();
                 ruc = mEditTextRuc_A.getText().toString();
                 telefono = mEditTextTelefono_A.getText().toString();
                 email = mEditTextEmail_A.getText().toString();
                 password = mEditTextPassword_A.getText().toString();
-
                 if (!email.isEmpty() && !password.isEmpty()) {
 
                     if (password.length() >= 6) {
@@ -85,9 +98,7 @@ public class RegistrarAuspiciadorActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-
                     String id = mAuth.getCurrentUser().getUid();
-
                     Map<String,Object> map = new HashMap<>();
                     map.put("razonsocial",razonsocial);
                     map.put("ruc",ruc);

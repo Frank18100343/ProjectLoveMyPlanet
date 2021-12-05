@@ -1,14 +1,18 @@
 package dev.frankperez.projectlovemyplanet;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,19 +46,9 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference db;
 
-
-
     private String email = "";
     private String password = "";
 
-
-    public String nombres;
-    public String ruc;
-    public String razonSocial;
-    public String apellidos;
-    public String correo;
-    public String telefono;
-    public String saldoPuntos;
 
 
     @Override
@@ -62,13 +56,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance().getReference();
 
         mEditTextEmail = findViewById(R.id.mEditTextEmail);
+
+        //mEditTextEmail.setText("julian@esan.com");
         mEditTextPassword = findViewById(R.id.mEditTextPassword);
+        //mEditTextPassword.setText("123456");
         mButtonVoluntario = findViewById(R.id.mButtonVoluntario);
         mButtonAuspiciador = findViewById(R.id.mButtonAuspiciador);
         mButtonAcceder = findViewById(R.id.mButtonAcceder);
@@ -79,9 +74,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = mEditTextEmail.getText().toString();
                 password = mEditTextPassword.getText().toString();
-
-
-
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -91,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Autentificación Correcta", Toast.LENGTH_SHORT).show();
 
                                 } else {
+                                    //buscarRolUsuario();
                                     Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -118,81 +111,44 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     public void buscarRolUsuario() {
+
+        boolean isAuspiciador = ((RadioButton) findViewById(R.id.rbAuspiciador)).isChecked();
+        GlobalClass.Tipo = (isAuspiciador ? "Auspiciador" : "Voluntario");
+
         String id = mAuth.getCurrentUser().getUid();
-        db.child("voluntarios").child(id).addValueEventListener(new ValueEventListener() {
+        String tipo =(isAuspiciador ? "auspiciadores" : "voluntarios");
+        db.child(tipo).child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-
-                    GlobalClass globalClass = (GlobalClass) getApplicationContext();
-
-                    nombres  = snapshot.child("nombres").getValue().toString();
-                    apellidos  = snapshot.child("apellidos").getValue().toString();
-                    correo  = snapshot.child("email").getValue().toString();
-                    telefono  = snapshot.child("telefono").getValue().toString();
-                    saldoPuntos  = snapshot.child("saldoPuntos").getValue().toString();
-
-                    globalClass.setNombres(nombres);
-                    globalClass.setApellidos(apellidos);
-                    globalClass.setEmail(correo);
-                    globalClass.setTelefono(telefono);
-                    globalClass.setSaldoPuntos(saldoPuntos);
-
-                    //Redireccionar a su layaout Voluntario
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                if (ds.exists()) {
+                    GlobalClass.idUsuario = ds.getKey();
+                    GlobalClass.email = ds.child("email").getValue().toString();
+                    GlobalClass.telefono = ds.child("telefono").getValue().toString();
+                    if (!isAuspiciador) {
+                        GlobalClass.apellidos = ds.child("apellidos").getValue().toString();
+                        GlobalClass.nombres = ds.child("nombres").getValue().toString();
+                        GlobalClass.saldoPuntos = Integer.parseInt(ds.child("saldopuntos").getValue().toString());
+                    } else {
+                        GlobalClass.ruc = ds.child("ruc").getValue().toString();
+                        GlobalClass.razonSocial = ds.child("razonsocial").getValue().toString();
+                        GlobalClass.nombres = GlobalClass.razonSocial;
+                        GlobalClass.apellidos = "";
+                    }
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-                    //startActivity(new Intent(LoginActivity.this, VoluntarioActivity.class));
-                    //falta ocultar opciones segun perfil
+                }else{
+                    Toast.makeText(LoginActivity.this, "No se encontró al responsable", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
-/*
-        public void cargarActividades() {
-            final List<Actividad> actividades = new ArrayList<>();
-            db.child("actividades").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            String id = ds.getKey();
-                            String nombre = ds.child("nombre").getValue().toString();
-                            actividades.add(new Actividad(id, nombre));
-                        }
-                        ArrayAdapter<Actividad> arrayAdapter = new ArrayAdapter<>(LoginActivity.this, android.R.layout.simple_dropdown_item_1line, actividades);
-                        mSpinnerActividades.setAdapter(arrayAdapter);
-                    }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-
-            db.child("auspiciadores").child(id).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                    if (snapshot2.exists()) {
-                        //Redireccionar a su layaout Auspiciador
-                        startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-                        //falta ocultar opciones segun perfil
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-        }*/
-    }
-
+}

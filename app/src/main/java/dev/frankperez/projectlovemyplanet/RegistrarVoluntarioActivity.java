@@ -3,10 +3,13 @@ package dev.frankperez.projectlovemyplanet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,7 +32,7 @@ public class RegistrarVoluntarioActivity extends AppCompatActivity {
     private EditText mEditTextEmail_V;
     private EditText mEditTextPassword_V;
     private Button mButtonRegVol;
-
+    private CheckBox checkAceptar;
     //Variables de entrada
     private String nombres = "";
     private String apellidos = "";
@@ -48,17 +51,33 @@ public class RegistrarVoluntarioActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance().getReference();
 
-
+        checkAceptar = findViewById(R.id.checkAceptar);
         mEditTextNombres_V = findViewById(R.id.mEditTextNombres_V);
         mEditTextApellidos_V = findViewById(R.id.mEditTextApellidos_V);
         mEditTextTelefono_V = findViewById(R.id.mEditTextTelefono_V);
         mEditTextEmail_V = findViewById(R.id.mEditTextEmail_V);
         mEditTextPassword_V = findViewById(R.id.mEditTextPassword_V);
         mButtonRegVol = findViewById(R.id.mButtonRegVol);
+        checkAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mButtonRegVol.setEnabled(checkAceptar.isChecked());
+            }
+        });
+
+        mButtonRegVol.setEnabled(false);
+
+
+
+
 
         mButtonRegVol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkAceptar.isChecked()){
+                    Toast.makeText(RegistrarVoluntarioActivity.this, "Debe aceptar los terminos y condiciones", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 nombres = mEditTextNombres_V.getText().toString();
                 apellidos = mEditTextApellidos_V.getText().toString();
                 telefono = mEditTextTelefono_V.getText().toString();
@@ -95,7 +114,7 @@ public class RegistrarVoluntarioActivity extends AppCompatActivity {
                     map.put("apellidos",apellidos);
                     map.put("telefono",telefono);
                     map.put("email",email);
-                    map.put("saldoPuntos",0);
+                    map.put("saldopuntos",0);
                     //map.put("password",System.text.Encoding.UTF8.GetBytes(password));
 
                     db.child("voluntarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {

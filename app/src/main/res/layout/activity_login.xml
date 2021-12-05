@@ -92,4 +92,33 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTituloCrearCuenta"
         app:layout_constraintVertical_bias="0.112"
         tools:ignore="OnClick" />
+
+    <RadioGroup
+        android:layout_width="244dp"
+        android:layout_height="71dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/mEditTextEmail"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="100dp">
+
+        <RadioButton
+            android:id="@+id/rbAuspiciador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auspiciador"
+            android:checked="true"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="131dp" />
+
+        <RadioButton
+            android:id="@+id/rbVoluntario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voluntario"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="131dp" />
+
+    </RadioGroup>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
